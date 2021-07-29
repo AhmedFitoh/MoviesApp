@@ -47,7 +47,6 @@ extension MovieDetailsView: MovieDetailsPresenterToViewProtocol {
         navigationItem.title = presenter?.movie.movieName
         posterImageView.loadImageUsingCache(withUrl: ImageUrlBuilder.getUrl(stringUrl: presenter?.movie.posterPath, size: .w92))
         posterBackgroundImageView.loadImageUsingCache(withUrl: ImageUrlBuilder.getUrl(stringUrl: presenter?.movie.posterPath, size: .w500))
-
         overviewLabel.text = presenter?.movie?.overview
     }
     
@@ -55,10 +54,8 @@ extension MovieDetailsView: MovieDetailsPresenterToViewProtocol {
         guard let details = presenter?.movieDetails else {
             return
         }
-        
         let productionCompanies = details.productionCompanies?.compactMap {$0.name}.joined(separator: "\n") ?? ""
         movieInfoLabel.text = "\(details.releaseDate ?? "")\n\(details.runtime ?? 0) Mins\n\(productionCompanies)"
-        
         genereLabel.text = details.genres.compactMap {$0.name}.joined(separator: "\n")
         statusLabel.text = details.status
         spokenLangsLabel.text = details.spokenLanguages.compactMap{$0.englishName}.joined(separator: "\n")
