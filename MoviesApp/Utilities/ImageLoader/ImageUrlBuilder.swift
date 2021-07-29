@@ -18,10 +18,10 @@ class ImageUrlBuilder {
     }
 
     static func getUrl(stringUrl: String?, size: ImageSize) -> URL?{
-        guard var stringUrl = stringUrl else {
+        guard var stringUrl = stringUrl, !stringUrl.isEmpty else {
             return nil
         }
-        stringUrl = "https://image.tmdb.org/t/p/\(size.rawValue)/\(stringUrl)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        stringUrl = "https://image.tmdb.org/t/p/\(size.rawValue)\(stringUrl)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         return URL(string: stringUrl)
     }
 }

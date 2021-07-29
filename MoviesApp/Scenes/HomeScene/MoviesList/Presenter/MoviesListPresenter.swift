@@ -85,5 +85,4 @@ extension MoviesListPresenter: MoviesListViewToPresenterProtocol {
         requestNewPage()
     }
     
-    
 }

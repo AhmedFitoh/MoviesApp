@@ -14,15 +14,21 @@ class WebServiceMock: WebService{
                           completion: @escaping (Data?) -> Void,
                           failure: @escaping (Error?) -> Void) {
         let bundle = Bundle(for: WebServiceMock.self)
-        if api.url == EndPoints.fetchTrendingMovies(page: 1).url{
-            if let path = bundle.path(forResource: "movies_stub", ofType: "json") {
-                if let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe){
-                    completion(data)
-                } else {
-                    failure(CustomError.generalError)
-                }
+        var fileName = ""
+        switch api.url {
+        case EndPoints.fetchTrendingMovies(page: 1).url:
+            fileName = "movies_stub"
+        case EndPoints.getMovieDetails(id: 1).url:
+            fileName = "details_stub"
+        default:
+            break
+        }
+        if let path = bundle.path(forResource: fileName, ofType: "json") {
+            if let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe){
+                completion(data)
+            } else {
+                failure(CustomError.generalError)
             }
-            
         }
     }
 }

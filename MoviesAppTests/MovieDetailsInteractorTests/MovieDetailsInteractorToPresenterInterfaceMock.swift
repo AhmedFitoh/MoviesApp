@@ -1,10 +1,10 @@
 @testable import MoviesApp
 
-class MoviesListInteractorToPresenterInterfaceMock {
+class MovieDetailsInteractorToPresenterInterfaceMock {
     var functionsCalled = [String]()
     
     // MARK: - Input Variables
-    var info: MoviesListModel?
+    var info: MovieDetailsModel?
     var error: Error?
     weak var interactor: PresenterToInteractorTestProtocolMock?
     
@@ -13,17 +13,19 @@ class MoviesListInteractorToPresenterInterfaceMock {
     }
 }
 
-extension MoviesListInteractorToPresenterInterfaceMock: MoviesListInteractorToPresenterProtocol {
-   
-    func fetchTrendingMoviesSuccess(model: MoviesListModel) {
+
+extension MovieDetailsInteractorToPresenterInterfaceMock: MovieDetailsInteractorToPresenterProtocol {
+    
+    func fetchMovieDetailsSuccess(model: MovieDetailsModel) {
         functionsCalled.append(#function)
         info = model
         interactor?.fetchExp?.fulfill()
     }
     
-    func fetchTrendingMoviesError(error: Error?) {
+    func fetchMovieDetailsFailure(error: Error?) {
         functionsCalled.append(#function)
         self.error = error
         interactor?.fetchExp?.fulfill()
     }
+    
 }
